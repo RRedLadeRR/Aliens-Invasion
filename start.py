@@ -25,6 +25,18 @@ class AlienInvasion:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 sys.exit()
+            elif event.type == pg.KEYDOWN:
+                if event.key == pg.K_RIGHT:
+                    # Переміщуємо корабель праворуч
+                    self.ship.moving_right = True
+                elif event.key == pg.K_LEFT:
+                    # Переміщуємо корабель ліворуч
+                    self.ship.moving_left = True
+            elif event.type == pg.KEYUP:
+                if event.key == pg.K_RIGHT:
+                    self.ship.moving_right = False         
+                elif event.key == pg.K_LEFT:
+                    self.ship.moving_left = False
 
     def _update_screen(self):
             self.screen.fill(self.settings.bg_color)
@@ -37,7 +49,8 @@ class AlienInvasion:
         while True:
             # Відслідковування подій клавіатури та миші
             self.check_events()
-
+            # Оновлення позиції корабля
+            self.ship.update()
             # За кожної ітерації циклу оновлюється екран та Відображення останнього відрендереного екрану
             self._update_screen()
 
