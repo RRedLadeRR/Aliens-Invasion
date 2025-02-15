@@ -26,19 +26,20 @@ class AlienInvasion:
             if event.type == pg.QUIT:
                 sys.exit()
 
+    def _update_screen(self):
+            self.screen.fill(self.settings.bg_color)
+            self.ship.blitme()
+
+            pg.display.flip()
+
     def run_game(self):
         """Запуск основного циклу гри"""
         while True:
             # Відслідковування подій клавіатури та миші
             self.check_events()
-                    
-            # За кожної ітерації циклу оновлюється екран
-            self.screen.fill(self.settings.bg_color)
-            self.ship.blitme()
 
-            # Відображення останнього відрендереного екрану
-            pg.display.flip()
-
+            # За кожної ітерації циклу оновлюється екран та Відображення останнього відрендереного екрану
+            self._update_screen()
 
 if __name__ == '__main__':
     # Створення екземпляру та запуск гри
