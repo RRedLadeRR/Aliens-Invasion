@@ -1,6 +1,9 @@
 import pygame as pg
 
 
+W = 60
+H = 65.8
+
 class Ship:
     """Клас для управління кораблем"""
 
@@ -11,7 +14,8 @@ class Ship:
         self.screen_rect = ai_game.screen.get_rect()
 
         # Завантаження корабля і отримання поверхні
-        self.image = pg.image.load("images/x-wing.png")
+        # self.image = pg.image.load("images/x-wing.png")
+        self.image = pg.transform.scale(pg.image.load("images/x-wing.png"), (W, H))
         self.rect = self.image.get_rect()
         # Кожен новий корабель з'являеться у нижній частині екрану
         self.rect.midbottom = self.screen_rect.midbottom
