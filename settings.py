@@ -9,4 +9,4 @@ class Settings:
         self.bg_color = (128, 0, 0)
 
         # Параметри корабля
-        self.ship_speed = 0.2
+        self.ship_speed = 0.5
