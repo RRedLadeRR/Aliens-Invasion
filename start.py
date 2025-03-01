@@ -60,6 +60,14 @@ class AlienInvasion:
             new_bullets = Bullet(self)
             self.bullets.add(new_bullets)
 
+    def _update_bullets(self):
+        """Оновлює позиції снарядів"""
+        self.bullets.update()
+            # Видалення снарядів за краєм екрану
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
+
     def _update_screen(self):
             # За кожної ітерації циклу оновлюється екран та Відображення останнього відрендереного екрану
             self.screen.fill(self.settings.bg_color)
@@ -78,11 +86,7 @@ class AlienInvasion:
             # Оновлення позиції корабля
             self.ship.update()
             # Оновлення снарядів
-            self.bullets.update()
-            # Видалення снарядів за краєм екрану
-            for bullet in self.bullets.copy():
-                if bullet.rect.bottom <= 0:
-                    self.bullets.remove(bullet)
+            self._update_bullets()
             # За кожної ітерації циклу оновлюється екран та Відображення останнього відрендереного екрану
             self._update_screen()
 
