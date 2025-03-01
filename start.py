@@ -2,6 +2,8 @@ import sys
 
 import pygame as pg
 
+from bullet import Bullet
+
 from settings import Settings
 
 from ship import Ship
@@ -42,6 +44,8 @@ class AlienInvasion:
             self.ship.moving_left = True
         elif event.key == pg.K_ESCAPE:
             sys.exit()
+        elif event.key == pg.K_SPACE:
+            self._fire_bullet()
 
     def _check_keyup_events(self, event):
         """Реагує на натиснення клавіш"""
@@ -50,10 +54,17 @@ class AlienInvasion:
         elif event.key == pg.K_LEFT:
             self.ship.moving_left = False
 
+    def _fire_bullet(self):
+        """Створює новий снаряд та додає його до групи bulets"""
+        new_bullets = Bullet(self)
+        self.bullets.add(new_bullets)
+
     def _update_screen(self):
             # За кожної ітерації циклу оновлюється екран та Відображення останнього відрендереного екрану
             self.screen.fill(self.settings.bg_color)
             self.ship.blitme()
+            for bullet in self.bullets.sprites():
+                bullet.draw_bullet()
 
             # Відображення останнього прорисованого екрану
             pg.display.flip()
