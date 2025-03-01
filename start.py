@@ -22,6 +22,7 @@ class AlienInvasion:
         pg.display.set_caption("Alien Invasion")
 
         self.ship = Ship(self)
+        self.bullets = pg.sprite.Group()
 
     def _check_events(self):
         """Обробляє натиснення клавіш та подій миші"""
@@ -54,6 +55,7 @@ class AlienInvasion:
             self.screen.fill(self.settings.bg_color)
             self.ship.blitme()
 
+            # Відображення останнього прорисованого екрану
             pg.display.flip()
 
     def run_game(self):
@@ -63,6 +65,8 @@ class AlienInvasion:
             self._check_events()
             # Оновлення позиції корабля
             self.ship.update()
+            # Оновлення снарядів
+            self.bullets.update()
             # За кожної ітерації циклу оновлюється екран та Відображення останнього відрендереного екрану
             self._update_screen()
 
