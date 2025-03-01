@@ -78,6 +78,10 @@ class AlienInvasion:
             self.ship.update()
             # Оновлення снарядів
             self.bullets.update()
+            # Видалення снарядів за краєм екрану
+            for bullet in self.bullets.copy():
+                if bullet.rect.bottom <= 0:
+                    self.bullets.remove(bullet)
             # За кожної ітерації циклу оновлюється екран та Відображення останнього відрендереного екрану
             self._update_screen()
 
