@@ -50,6 +50,7 @@ class AlienInvasion:
             self.ship.moving_left = False
 
     def _update_screen(self):
+            # За кожної ітерації циклу оновлюється екран та Відображення останнього відрендереного екрану
             self.screen.fill(self.settings.bg_color)
             self.ship.blitme()
 
