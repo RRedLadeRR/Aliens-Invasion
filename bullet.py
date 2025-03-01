@@ -20,3 +20,12 @@ class Bullet(Sprite):
 
         # Позиція снаряду зберігаеться як float
         self.y = float(self.rect.y)
+
+    def draw_bullet(self):
+        """Виводитиь снаряд на екран"""
+        pg.draw.rect(self.screen, self.color, self.rect)
+
+    def update(self):
+        """Переміщує снаряд вгору по екрану"""
+        self.y -= self.settings.bullet_speed
+        self.rect.y = self.y
