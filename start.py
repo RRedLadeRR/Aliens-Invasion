@@ -33,11 +33,11 @@ class AlienInvasion:
     def _check_keydown_events(self, event):
         """Реагує на натиснення клавіш"""
         if event.key == pg.K_RIGHT:
-                    # Переміщуємо корабель праворуч
             self.ship.moving_right = True
         elif event.key == pg.K_LEFT:
-                    # Переміщуємо корабель ліворуч
             self.ship.moving_left = True
+        elif event.key == pg.K_ESCAPE:
+            sys.exit()
 
     def _check_keyup_events(self, event):
         """Реагує на натиснення клавіш"""
