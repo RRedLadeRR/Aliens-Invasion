@@ -115,10 +115,14 @@ class AlienInvasion:
     def _update_bullets(self):
         """Оновлює позиції снарядів"""
         self.bullets.update()
-            # Видалення снарядів за краєм екрану
+
+        # Видалення снарядів за краєм екрану
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
+
+        # Перевірка зіткнень
+        collisions = pg.sprite.groupcollide(self.bullets, self.aliens, True, True)
 
     def _update_screen(self):
             # За кожної ітерації циклу оновлюється екран та Відображення останнього відрендереного екрану
