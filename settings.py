@@ -17,3 +17,7 @@ class Settings:
         self.bullet_height = 15
         self.bullet_color = (0, 0, 0)
         self.bullets_alowed = 128
+
+        # Параметри прибульців
+        self.alien_speed = 1 # 0.1
+        

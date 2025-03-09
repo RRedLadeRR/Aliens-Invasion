@@ -94,6 +94,10 @@ class AlienInvasion:
             new_bullets = Bullet(self)
             self.bullets.add(new_bullets)
 
+    def _update_aliens(self):
+        """Оновлює позиції всіх прибульців флоту"""
+        self.aliens.update()
+
     def _update_bullets(self):
         """Оновлює позиції снарядів"""
         self.bullets.update()
@@ -122,6 +126,8 @@ class AlienInvasion:
             self.ship.update()
             # Оновлення снарядів
             self._update_bullets()
+            # Оновлення позіції та статусу прибульців
+            self._update_aliens()
             # За кожної ітерації циклу оновлюється екран та Відображення останнього відрендереного екрану
             self._update_screen()
 

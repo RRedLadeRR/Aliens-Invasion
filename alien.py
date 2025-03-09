@@ -11,6 +11,7 @@ class Alien(Sprite):
         """Ініціалізує прибульця та задає його початкову позіцію"""
         super().__init__()
         self.screen = ai_game.screen
+        self.settings = ai_game.settings
 
         # Завантаження зображення прибульця та визначення rect
         self.image = pg.transform.scale(pg.image.load("images/tie-fighter.png"), (W, H))
@@ -22,3 +23,9 @@ class Alien(Sprite):
 
         # Збереження точної горизонтальної позиції прибульця
         self.x = float(self.rect.x)
+
+    def update(self):
+        """Переміщує прибульця праворуч"""
+        self.x += self.settings.alien_speed
+        self.rect.x = self.x
+        return super().update()
