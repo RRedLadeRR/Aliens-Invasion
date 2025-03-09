@@ -60,6 +60,14 @@ class AlienInvasion:
         elif event.key == pg.K_LEFT:
             self.ship.moving_left = False
 
+    def _create_alien(self, alien_number):
+        """Створює прибульця і роміщує його в ряду"""
+        alien = Alien(self)
+        alien_width = alien.rect.width
+        alien.x = alien_width + 2 * alien_width * alien_number
+        alien.rect.x = alien.x
+        self.aliens.add(alien)
+
     def _create_fleet(self):
         """Створює флот прибульців"""
         # Створення прибульця і визначення кількості прибульців в ряду
@@ -70,10 +78,7 @@ class AlienInvasion:
 
         # Створення першого ряду прибульців
         for alien_number in range (number_aliens_x):
-            alien = Alien(self)
-            alien.x = alien_width + 2 * alien_width * alien_number
-            alien.rect.x = alien.x
-            self.aliens.add(alien)
+            self._create_alien(alien_number)
 
     def _fire_bullet(self):
         """Створює новий снаряд та додає його до групи bulets"""
