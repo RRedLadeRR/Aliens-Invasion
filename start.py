@@ -38,6 +38,15 @@ class AlienInvasion:
             alien.rect.y += self.settings.fleet_drop_speed
         self.settings.fleet_direction *= -1
 
+    def _check_bullet_alien_collisions(self):
+        """Обробляє колізії снарядів та прибульців"""
+        # Перевірка зіткнень
+        collisions = pg.sprite.groupcollide(self.bullets, self.aliens, True, True)
+        if not self.aliens:
+            # Знишення існуючих снарядів та створення нового флоту
+            self.bullets.empty()
+            self._create_fleet()
+
     def _check_events(self):
         """Обробляє натиснення клавіш та подій миші"""
         for event in pg.event.get():
@@ -121,13 +130,7 @@ class AlienInvasion:
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
 
-        # Перевірка зіткнень
-        collisions = pg.sprite.groupcollide(self.bullets, self.aliens, True, True)
-
-        if not self.aliens:
-            # Знишення існуючих снарядів та створення нового флоту
-            self.bullets.empty()
-            self._create_fleet()
+        self._check_bullet_alien_collisions()
 
     def _update_screen(self):
             # За кожної ітерації циклу оновлюється екран та Відображення останнього відрендереного екрану
