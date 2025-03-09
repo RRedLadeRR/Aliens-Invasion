@@ -40,7 +40,7 @@ class AlienInvasion:
 
     def _check_bullet_alien_collisions(self):
         """Обробляє колізії снарядів та прибульців"""
-        # Перевірка зіткнень
+        # Перевірка зіткнень прибулець-снаряд
         collisions = pg.sprite.groupcollide(self.bullets, self.aliens, True, True)
         if not self.aliens:
             # Знишення існуючих снарядів та створення нового флоту
@@ -120,6 +120,12 @@ class AlienInvasion:
         """Оновлює позиції всіх прибульців флоту"""
         self._check_fleet_edges()
         self.aliens.update()
+
+        # Перевірка зіткнень прибулець-корабель
+        if pg.sprite.spritecollideany(self.ship, self.aliens):
+            print(" ")
+            print("!!! WARNING !!!")
+            print("!!! Ship hit!!!")
 
     def _update_bullets(self):
         """Оновлює позиції снарядів"""
