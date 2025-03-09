@@ -124,6 +124,11 @@ class AlienInvasion:
         # Перевірка зіткнень
         collisions = pg.sprite.groupcollide(self.bullets, self.aliens, True, True)
 
+        if not self.aliens:
+            # Знишення існуючих снарядів та створення нового флоту
+            self.bullets.empty()
+            self._create_fleet()
+
     def _update_screen(self):
             # За кожної ітерації циклу оновлюється екран та Відображення останнього відрендереного екрану
             self.screen.fill(self.settings.bg_color)
