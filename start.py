@@ -107,7 +107,8 @@ class AlienInvasion:
 
     def _check_play_button(self, mouse_pos):
         """Запускае нову гру коли натиснуто кнопку Play"""
-        if self.play_button.rect.collidepoint(mouse_pos):
+        button_clicked = self.play_button.rect.collidepoint(mouse_pos)
+        if button_clicked and not self.stats.game_active:
             # Скидання ігрової статистики
             self.stats.reset_stats()
             self.stats.game_active = True
@@ -119,6 +120,9 @@ class AlienInvasion:
             # Створення нового флоту та розміщення корабля по центру
             self._create_fleet()
             self.ship.center_ship()
+
+            # Приховати мишу
+            pg.mouse.set_visible(False)
 
     def _create_alien(self, alien_number, row_number):
         """Створює прибульця і роміщує його в ряду"""
@@ -172,6 +176,7 @@ class AlienInvasion:
             sleep(0.5)
         else:
             self.stats.game_active = False
+            pg.mouse.set_visible(True)
 
     def _update_aliens(self):
         """Оновлює позиції всіх прибульців флоту"""
