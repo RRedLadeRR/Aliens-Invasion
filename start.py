@@ -45,6 +45,14 @@ class AlienInvasion:
             alien.rect.y += self.settings.fleet_drop_speed
         self.settings.fleet_direction *= -1
 
+    def _check_aliens_bottom(self):
+        """Перевіряє, чи досягли прибульці нижнього краю екрану"""
+        screen_rect =self.screen.get_rect()
+        for alien in self.aliens.sprites():
+            if alien.rect.bottom >= screen_rect.bottom:
+                self._ship_hit()
+                break
+
     def _check_bullet_alien_collisions(self):
         """Обробляє колізії снарядів та прибульців"""
         # Перевірка зіткнень прибулець-снаряд
@@ -151,6 +159,8 @@ class AlienInvasion:
             print("!!! Ship hit!!!")
             print(" ")
             self._ship_hit()
+
+        self._check_aliens_bottom()
 
     def _update_bullets(self):
         """Оновлює позиції снарядів"""
