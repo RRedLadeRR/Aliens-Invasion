@@ -9,6 +9,8 @@ from alien import Alien
 
 from bullet import Bullet
 
+from button import Button
+
 from gamestats import GameStats
 
 from settings import Settings
@@ -38,6 +40,9 @@ class AlienInvasion:
         self.aliens = pg.sprite.Group()
 
         self._create_fleet()
+
+        # Створення кнопки play
+        self.play_button = Button(self, "Play")
 
     def _change_fleet_direction(self):
         """Опускає весь флот та змінює напрям руху"""
@@ -184,6 +189,10 @@ class AlienInvasion:
                 bullet.draw_bullet()
             self.aliens.draw(self.screen)
 
+            # Кнопка play відображаеться коли гра неактивна
+            if not self.stats.game_active:
+                self.play_button.draw_button()
+
             # Відображення останнього прорисованого екрану
             pg.display.flip()
 
@@ -200,7 +209,7 @@ class AlienInvasion:
                 self._update_bullets()
                 # Оновлення позіції та статусу прибульців
                 self._update_aliens()
-                
+
             # За кожної ітерації циклу оновлюється екран та Відображення останнього відрендереного екрану
             self._update_screen()
 
