@@ -67,7 +67,8 @@ class AlienInvasion:
         collisions = pg.sprite.groupcollide(self.bullets, self.aliens, True, True)
 
         if collisions:
-            self.stats.score += self.settings.alien_points
+            for aliens in collisions.values():
+                self.stats.score += self.settings.alien_points * len(aliens)
             self.sb.prepare_score()
 
         if not self.aliens:
@@ -122,6 +123,7 @@ class AlienInvasion:
             self.settings.initialize_dynamic_settings()
             self.stats.reset_stats()
             self.stats.game_active = True
+            self.sb.prepare_score()
 
             # Очистка списків прибульців та снарядів
             self.aliens.empty()
