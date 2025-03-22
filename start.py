@@ -13,6 +13,8 @@ from button import Button
 
 from gamestats import GameStats
 
+from scoreboard import Scoreboard
+
 from settings import Settings
 
 from ship import Ship
@@ -34,6 +36,7 @@ class AlienInvasion:
 
         # Створення єкземпляру для зберігання ігрової статистики
         self.stats = GameStats(self)
+        self.sb = Scoreboard(self)
 
         self.ship = Ship(self)
         self.bullets = pg.sprite.Group()
@@ -213,6 +216,9 @@ class AlienInvasion:
             for bullet in self.bullets.sprites():
                 bullet.draw_bullet()
             self.aliens.draw(self.screen)
+
+            # Виведення інформації про результат
+            self.sb.Show_score()
 
             # Кнопка play відображаеться коли гра неактивна
             if not self.stats.game_active:
