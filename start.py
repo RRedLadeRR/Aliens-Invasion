@@ -65,6 +65,11 @@ class AlienInvasion:
         """Обробляє колізії снарядів та прибульців"""
         # Перевірка зіткнень прибулець-снаряд
         collisions = pg.sprite.groupcollide(self.bullets, self.aliens, True, True)
+
+        if collisions:
+            self.stats.score += self.settings.alien_points
+            self.sb.prepare_score()
+
         if not self.aliens:
             # Знишення існуючих снарядів та створення нового флоту
             self.bullets.empty()
@@ -218,7 +223,7 @@ class AlienInvasion:
             self.aliens.draw(self.screen)
 
             # Виведення інформації про результат
-            self.sb.Show_score()
+            self.sb.show_score()
 
             # Кнопка play відображаеться коли гра неактивна
             if not self.stats.game_active:
