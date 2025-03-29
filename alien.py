@@ -14,7 +14,8 @@ class Alien(Sprite):
         self.settings = ai_game.settings
 
         # Завантаження зображення прибульця та визначення rect
-        self.image = pg.transform.scale(pg.image.load("images/tie-fighter.png"), (W, H))
+        filename = ("images/" + "tie-fighter.png" if self.settings.dark_mode else "tie-fighter.png")
+        self.image = pg.transform.scale(pg.image.load(filename), (W, H))
         self.rect = self.image.get_rect()
 
         # Кожен новий прибулець з'являеться в лівому верхньому куті екрану

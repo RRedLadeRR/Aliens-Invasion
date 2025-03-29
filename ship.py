@@ -16,8 +16,9 @@ class Ship(Sprite):
         self.screen_rect = ai_game.screen.get_rect()
 
         # Завантаження корабля і отримання поверхні
+        filename = ("images/" + "x-wing.png" if self.settings.dark_mode else "x-wing.png")
         # self.image = pg.image.load("images/x-wing.png")
-        self.image = pg.transform.scale(pg.image.load("images/x-wing.png"), (W, H))
+        self.image = pg.transform.scale(pg.image.load(filename), (W, H))
         self.rect = self.image.get_rect()
         # Кожен новий корабель з'являеться у нижній частині екрану
         self.rect.midbottom = self.screen_rect.midbottom

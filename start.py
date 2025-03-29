@@ -234,7 +234,7 @@ class AlienInvasion:
         self._check_bullet_alien_collisions()
 
     def _update_screen(self):
-            # За кожної ітерації циклу оновлюється екран та Відображення останнього відрендереного екрану
+            # За кожної ітерації циклу оновлюється екран та відображення останнього відрендереного екрану
             self.screen.fill(self.settings.bg_color)
             self.ship.blitme()
             for bullet in self.bullets.sprites():
