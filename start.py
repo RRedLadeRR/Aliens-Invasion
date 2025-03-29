@@ -110,10 +110,13 @@ class AlienInvasion:
             self.ship.moving_left = True
         elif event.key == pg.K_ESCAPE:
             sys.exit()
-        elif event.key == pg.K_SPACE:
+        elif event.key == pg.K_SPACE and not self.stats.game_paused:
             self._fire_bullet()
-        elif event.key == pg.K_RETURN and not self.stats.game_active:
-            self._start_new_game()
+        elif event.key == pg.K_RETURN:
+            if not self.stats.game_active:
+                self._start_new_game()
+            else:
+                self.stats.game_paused = not self.stats.game_paused
 
     def _check_keyup_events(self, event):
         """Реагує на натиснення клавіш"""
@@ -253,7 +256,7 @@ class AlienInvasion:
             # Відслідковування подій клавіатури та миші
             self._check_events()
 
-            if self.stats.game_active:
+            if self.stats.game_active and not self.stats.game_paused:
                 # Оновлення позиції корабля
                 self.ship.update()
                 # Оновлення снарядів
