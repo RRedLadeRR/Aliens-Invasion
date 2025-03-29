@@ -44,8 +44,9 @@ class AlienInvasion:
 
         self._create_fleet()
 
-        # Створення кнопки play
+        # Створення кнопкок play та Pause
         self.play_button = Button(self, "Play")
+        self.pause_button = Button(self, "Pause")
 
     def _change_fleet_direction(self):
         """Опускає весь флот та змінює напрям руху"""
@@ -243,9 +244,11 @@ class AlienInvasion:
             # Виведення інформації про результат
             self.sb.show_score()
 
-            # Кнопка play відображаеться коли гра неактивна
+            # Кнопка play відображаеться коли гра неактивна, кнопка Pause відображаеться коли гра у паузі
             if not self.stats.game_active:
                 self.play_button.draw_button()
+            elif self.stats.game_paused:
+                self.pause_button.draw_button()
 
             # Відображення останнього прорисованого екрану
             pg.display.flip()
