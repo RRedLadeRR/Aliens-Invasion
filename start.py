@@ -19,6 +19,8 @@ from settings import Settings
 
 from ship import Ship
 
+from star import Star
+
 
 class AlienInvasion:
     """Клас для управління ресурсами та поведікою гри"""
@@ -37,6 +39,10 @@ class AlienInvasion:
         # Створення єкземпляру для зберігання ігрової статистики
         self.stats = GameStats(self)
         self.sb = Scoreboard(self)
+
+        self.stars = pg.sprite.Group()
+        for _ in range(self.settings.star_limit):
+            self.stars.add(Star(self))
 
         self.ship = Ship(self)
         self.bullets = pg.sprite.Group()
@@ -236,6 +242,7 @@ class AlienInvasion:
     def _update_screen(self):
             # За кожної ітерації циклу оновлюється екран та відображення останнього відрендереного екрану
             self.screen.fill(self.settings.bg_color)
+            self.stars.update()
             self.ship.blitme()
             for bullet in self.bullets.sprites():
                 bullet.draw_bullet()
